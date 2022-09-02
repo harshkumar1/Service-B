@@ -2,7 +2,7 @@ template: true   # required for local templates
 valuesFilePath: ./values.yml
 
 resources:
-  - name: dbp_repo
+  - name: dbp_repo_1
     type: GitRepo
     configuration:
       gitProvider: {{ .Values.var.gitProvider }}
@@ -10,7 +10,7 @@ resources:
       branches:
         include: {{ .Values.var.branches }} 
 
-  - name: dbp_image
+  - name: dbp_image_1
     type: Image
     configuration:
       registry: {{ .Values.service.artifactory }}
@@ -19,7 +19,7 @@ resources:
       imageTag: latest
       autoPull: true
       
-  - name: dbp_build_info
+  - name: dbp_build_info_1
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.var.artifactory }}
