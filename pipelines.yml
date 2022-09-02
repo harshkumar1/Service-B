@@ -13,7 +13,7 @@ resources:
   - name: dbp_image_1
     type: Image
     configuration:
-      registry: {{ .Values.service.artifactory }}
+      registry: {{ .Values.var.artifactory }}
       sourceRepository: {{ .Values.var.repo }}               # <-- required if registry is Artifactory
       imageName: {{ .Values.var.imageName }}
       imageTag: latest
