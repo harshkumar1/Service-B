@@ -39,6 +39,18 @@ pipelines:
     configuration:
       nodePool: {{ .Values.var.nodePool }}
     steps:
+      - name: docker_file_base_image_update
+        type: Bash
+        configuration:
+          affinityGroup: dbp_group
+          inputResources:
+            - name: service_a_build_info
+        execution:
+          onexecute:
+            - echo $service_a_build_info
+            - var=$service_a_build_info
+            - sed -i "1s/.*/$var/" Dockerfile1
+
       - name: docker_build
         type: DockerBuild
         configuration:
@@ -71,7 +83,6 @@ pipelines:
             - name: docker_push
           outputResources:
             - name: dbp_build_info
-
       #- name: promote_dbp_build
       #  type: PromoteBuild
       #  configuration:
