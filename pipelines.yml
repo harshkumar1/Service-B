@@ -46,7 +46,7 @@ pipelines:
           inputResources:
             - name: service_a_build_info
         execution:
-          onexecute:
+          onExecute:
             - echo $service_a_build_info
             - var=$service_a_build_info
             - sed -i "1s/.*/$var/" Dockerfile1
