@@ -39,10 +39,11 @@ pipelines:
     configuration:
       nodePool: {{ .Values.var.nodePool }}
     steps:
+
       - name: docker_file_base_image_update
         type: Bash
         configuration:
-          #affinityGroup: dbp_group
+          affinityGroup: dbp_group
           inputResources:
             - name: service_a_build_info
         execution:
@@ -59,6 +60,8 @@ pipelines:
           dockerFileName: Dockerfile
           dockerImageName: {{ .Values.var.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
+          inputSteps:
+            - name: docker_file_base_image_update
           inputResources:
             - name: dbp_repo_1
           integrations:
